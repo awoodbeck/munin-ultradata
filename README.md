@@ -6,7 +6,7 @@ plugins for Munin that graph UltraData metrics.
 
 ### REQUIREMENTS
 
-* [https://github.com/samuel/python-munin](Python-munin)
+* [Python-munin](https://github.com/samuel/python-munin)
 
 ### LICENSE
 
