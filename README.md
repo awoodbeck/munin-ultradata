@@ -1,7 +1,12 @@
 munin-ultradata
 ===============
 
-The purpose of this repository is to provide python-based plugins for Munin that graph UltraData metrics.
+The purpose of this repository is to provide python-based
+plugins for Munin that graph UltraData metrics.
+
+### REQUIREMENTS
+
+* [https://github.com/samuel/python-munin](Python-munin)
 
 ### LICENSE
 
