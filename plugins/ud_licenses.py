@@ -27,6 +27,7 @@ class UDLicensesPlugin(MuninPlugin):
                 dict(
                     label = "fsp",
                     info = 'Total number of used FSP licenses.',
+                    draw = 'AREA',
                     min = "0",
                 )
             ),
@@ -34,6 +35,7 @@ class UDLicensesPlugin(MuninPlugin):
                 dict(
                     label = "pooled",
                     info = 'Total number of pooled licenses.',
+                    draw = 'STACK',
                     min = "0",
                 )
             ),
@@ -41,6 +43,7 @@ class UDLicensesPlugin(MuninPlugin):
                 dict(
                     label = "sql",
                     info = 'Total number of used SQL licenses.',
+                    draw = 'STACK',
                     min = "0",
                 )
             ),
@@ -48,6 +51,7 @@ class UDLicensesPlugin(MuninPlugin):
                 dict(
                     label = "udt",
                     info = 'Total number of used UDT licenses.',
+                    draw = 'STACK',
                     min = "0",
                 )
             ),
@@ -55,6 +59,7 @@ class UDLicensesPlugin(MuninPlugin):
                 dict(
                     label = "total",
                     info = 'Total number of used licenses.',
+                    draw = 'LINE0',
                     min = "0",
                     warning = self.__total_licenses - 5,
                     critical = self.__total_licenses
