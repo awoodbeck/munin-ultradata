@@ -16,32 +16,28 @@ class UDReplicationLagPlugin(MuninPlugin):
     @property
     def fields(self):
         return [
-            ("publisher",
-                dict(
-                    label = "publisher",
-                    info = 'LSN lag on the publisher.',
-                    colour = "22ff22",  # Green
-                    min = "0",
-                )
-            ),
-            ("subscriber",
-                dict(
-                    label = "subscriber",
-                    info = 'LSN lag on the subscriber.',
-                    colour = "ff0000",  # Red
-                    min = "0",
-                )
-            ),
+            ("publisher", dict(
+                label="publisher",
+                info='LSN lag on the publisher.',
+                colour="22ff22",  # Green
+                min="0",
+            )),
+            ("subscriber", dict(
+                label="subscriber",
+                info='LSN lag on the subscriber.',
+                colour="ff0000",  # Red
+                min="0",
+            )),
         ]
 
     def execute(self):
-        local_done_lsn = remote_done_lsn = next_avail_lsn = groups = 0
+        local_done_lsn = remote_done_lsn = next_avail_lsn = 0
         udbin = os.environ.get("udbin", "/usr/ud/bin")
+        groups = int(os.environ.get("groups", 8))
 
-        # Answers to reptool prompts.  This will display data for groups 0-7 that we'll parse below.
-        answers = "2\n0\n3\n4\n\n2\n1\n3\n4\n\n2\n2\n3\n4\n\n" \
-                  "2\n3\n3\n4\n\n2\n4\n3\n4\n\n2\n5\n3\n4\n\n" \
-                  "2\n6\n3\n4\n\n2\n7\n3\n4\n\n\n"
+        # Answers to reptool prompts.  This will display data for the number of groups specified in the config
+        # file, defaulting to 8 groups.
+        answers = linesep.join(["2{1}{0}{1}3{1}4{1}".format(g, linesep) for g in xrange(groups)]) + (linesep * 2)
 
         # Pipe in our answers and pipe out the output.
         output = Popen("{0}/reptool".format(udbin), stdin=PIPE, stdout=PIPE).communicate(answers)[0]
